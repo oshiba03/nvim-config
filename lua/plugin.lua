@@ -73,6 +73,9 @@ plug_config = {
 				pattern = 'ddu-ff',
 				callback = function()
 					vim.keymap.set('n', '<CR>', function() vim.fn['ddu#ui#ff#do_action']('itemAction') end, {buffer=true, silent=true})
+					vim.keymap.set('n', 't', function() vim.fn['ddu#ui#ff#do_action']('itemAction', {params={command='tabnew'}}) end, {buffer=true, silent=true})
+					vim.keymap.set('n', 's', function() vim.fn['ddu#ui#ff#do_action']('itemAction', {params={command='new'}}) end, {buffer=true, silent=true})
+					vim.keymap.set('n', 'v', function() vim.fn['ddu#ui#ff#do_action']('itemAction', {params={command='vnew'}}) end, {buffer=true, silent=true})
 					vim.keymap.set('n', 'i', function() vim.fn['ddu#ui#ff#do_action']('openFilterWindow') end, {buffer=true, silent=true})
 					vim.keymap.set('n', 'q', function() vim.fn['ddu#ui#ff#do_action']('quit') end, {buffer=true, silent=true})
 				end
