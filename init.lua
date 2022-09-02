@@ -105,7 +105,10 @@ vim.api.nvim_create_autocmd(
 	'BufEnter',
 	{
 		group = 'not_keep_comment',
-		callback = function() vim.opt_local.formatoptions:remove('ro') end
+		callback = function()
+			vim.opt_local.formatoptions:remove('r')
+			vim.opt_local.formatoptions:remove('o')
+		end
 	});
 
 -- nvimフォーカス時にファイル外部変更をチェック
