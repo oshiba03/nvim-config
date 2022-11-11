@@ -118,6 +118,13 @@ vim.api.nvim_create_autocmd(
 		callback = function() vim.api.nvim_command('checktime') end
 	})
 
+-- タブを閉じたら左のタブに移動
+vim.api.nvim_create_autocmd(
+	'TabClosed',
+	{
+		callback = function() vim.api.nvim_command('tabp') end
+	})
+
 -- 今開いているファイルのディレクトリに移動
 vim.api.nvim_create_user_command('Cdpwd', 'cd %:h', {})
 
