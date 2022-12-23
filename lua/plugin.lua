@@ -53,7 +53,21 @@ DeinAdd('Shougo/dein.vim')
 -- }}}
 
 -- ddu.vim {{{
-DeinAdd('Shougo/ddu.vim')
+plug_name = 'Shougo/ddu.vim'
+plug_config = {
+	hook_add = function()
+		vim.fn['ddu#custom#patch_global'](
+			'sourceOptions',
+			{
+				sourceParams = {
+					rg = {
+						args = {'--column', '--no-heading', '--color', 'never'},
+					}
+				}
+			})
+	end
+}
+DeinAdd(plug_name, plug_config)
 -- }}}
 
 -- ddu-ui-ff {{{
@@ -164,6 +178,10 @@ DeinAdd(plug_name, plug_config)
 DeinAdd('Shougo/ddu-source-rg')
 -- }}}
 
+-- ddc-ddc-ui-native {{{
+DeinAdd('Shougo/ddc-ui-native')
+-- }}}
+
 -- ddc-matcher_head {{{
 DeinAdd('Shougo/ddc-matcher_head')
 -- }}}
@@ -172,24 +190,15 @@ DeinAdd('Shougo/ddc-matcher_head')
 DeinAdd('Shougo/ddc-sorter_rank')
 -- }}}
 
--- ddc-around {{{
-DeinAdd('Shougo/ddc-around')
+-- ddc-source-around {{{
+DeinAdd('Shougo/ddc-source-around')
 -- }}}
 
 -- ddc.vim {{{
 plug_name = 'Shougo/ddc.vim'
 plug_config = {
 	hook_add = function()
-		vim.fn['ddu#custom#patch_global'](
-			'sourceOptions',
-			{
-				sourceParams = {
-					rg = {
-						args = {'--column', '--no-heading', '--color', 'never'},
-					}
-				}
-			})
-
+		vim.fn['ddc#custom#patch_global']('ui', 'native')
 		vim.fn['ddc#custom#patch_global']('sources', {'around', 'neosnippet'})
 		vim.fn['ddc#custom#patch_global'](
 			'sourceOptions',
