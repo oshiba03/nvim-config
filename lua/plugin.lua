@@ -362,6 +362,32 @@ plug_config = {
 DeinAdd(plug_name, plug_config)
 -- }}}
 
+-- memolist.vim {{{
+plug_name = 'glidenote/memolist.vim'
+plug_config = {
+	hook_add =	function()
+		vim.api.nvim_set_var('memolist_path', vim.fn.stdpath('data') .. '/memo')
+	end
+}
+DeinAdd(plug_name, plug_config)
+-- }}}
+
+-- cellwidths.nvim {{{
+plug_name = 'delphinus/cellwidths.nvim'
+plug_config = {
+	hook_add = function()
+		require'cellwidths'.setup {
+			name = 'default',
+			fallback = function(cw)
+				cw.add(0x203B, 2)
+			end,
+
+		}
+	end
+}
+DeinAdd(plug_name, plug_config)
+-- }}}
+
 vim.fn['dein#end']()
 
 -- vim:set foldmethod=marker foldmarker={{{,--\ }}}:
