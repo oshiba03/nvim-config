@@ -388,6 +388,14 @@ plug_config = {
 DeinAdd(plug_name, plug_config)
 -- }}}
 
+-- previm {{{
+DeinAdd('previm/previm')
+-- }}}
+
+-- open-browser.vim {{{
+DeinAdd('tyru/open-browser.vim')
+-- }}}
+
 vim.fn['dein#end']()
 
 -- vim:set foldmethod=marker foldmarker={{{,--\ }}}:
