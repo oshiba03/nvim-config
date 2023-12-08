@@ -53,21 +53,7 @@ DeinAdd('Shougo/dein.vim')
 -- }}}
 
 -- ddu.vim {{{
-plug_name = 'Shougo/ddu.vim'
-plug_config = {
-	hook_add = function()
-		vim.fn['ddu#custom#patch_global'](
-			'sourceOptions',
-			{
-				sourceParams = {
-					rg = {
-						args = {'--column', '--no-heading', '--color', 'never'},
-					}
-				}
-			})
-	end
-}
-DeinAdd(plug_name, plug_config)
+DeinAdd('Shougo/ddu.vim')
 -- }}}
 
 -- ddu-ui-ff {{{
@@ -86,12 +72,12 @@ plug_config = {
 			{
 				pattern = 'ddu-ff',
 				callback = function()
-					vim.keymap.set('n', '<CR>', function() vim.fn['ddu#ui#ff#do_action']('itemAction') end, {buffer=true, silent=true})
-					vim.keymap.set('n', 't', function() vim.fn['ddu#ui#ff#do_action']('itemAction', {params={command='tabnew'}}) end, {buffer=true, silent=true})
-					vim.keymap.set('n', 's', function() vim.fn['ddu#ui#ff#do_action']('itemAction', {params={command='new'}}) end, {buffer=true, silent=true})
-					vim.keymap.set('n', 'v', function() vim.fn['ddu#ui#ff#do_action']('itemAction', {params={command='vnew'}}) end, {buffer=true, silent=true})
-					vim.keymap.set('n', 'i', function() vim.fn['ddu#ui#ff#do_action']('openFilterWindow') end, {buffer=true, silent=true})
-					vim.keymap.set('n', 'q', function() vim.fn['ddu#ui#ff#do_action']('quit') end, {buffer=true, silent=true})
+					vim.keymap.set('n', '<CR>', function() vim.fn['ddu#ui#do_action']('itemAction') end, {buffer=true, silent=true})
+					vim.keymap.set('n', 't', function() vim.fn['ddu#ui#do_action']('itemAction', {params={command='tabnew'}}) end, {buffer=true, silent=true})
+					vim.keymap.set('n', 's', function() vim.fn['ddu#ui#do_action']('itemAction', {params={command='new'}}) end, {buffer=true, silent=true})
+					vim.keymap.set('n', 'v', function() vim.fn['ddu#ui#do_action']('itemAction', {params={command='vnew'}}) end, {buffer=true, silent=true})
+					vim.keymap.set('n', 'i', function() vim.fn['ddu#ui#do_action']('openFilterWindow') end, {buffer=true, silent=true})
+					vim.keymap.set('n', 'q', function() vim.fn['ddu#ui#do_action']('quit') end, {buffer=true, silent=true})
 				end
 			})
 
@@ -100,8 +86,9 @@ plug_config = {
 			{
 				pattern = 'ddu-ff-filter',
 				callback = function()
-					vim.keymap.set({'n','i'}, '<CR>', '<Esc><Cmd>call ddu#ui#ff#close()<CR>', {buffer=true, silent=true})
-					vim.keymap.set('n', 'q', function() vim.fn['ddu#ui#ff#do_action']('quit') end, {buffer=true, silent=true})
+					vim.keymap.set('n', '<CR>', '<Cmd>call ddu#ui#do_action("closeFilterWindow")<CR>', {buffer=true, silent=true})
+					vim.keymap.set('i', '<CR>', '<Esc><Cmd>call ddu#ui#do_action("closeFilterWindow")<CR>', {buffer=true, silent=true})
+					vim.keymap.set('n', 'q', function() vim.fn['ddu#ui#do_action']('quit') end, {buffer=true, silent=true})
 				end
 			})
 	end
@@ -154,28 +141,6 @@ plug_config = {
 	end
 }
 DeinAdd(plug_name, plug_config)
--- }}}
-
--- ddu-source-file_external {{{
-plug_name = 'matsui54/ddu-source-file_external'
-plug_config = {
-	hook_add = function()
-		vim.fn['ddu#custom#patch_global'](
-			'sourceParams',
-			{
-				file_external = {
-					cmd = {'python.bat', 'F:/work/T2Engine.git/ctrlp.py'}
-				}
-			})
-
-		vim.keymap.set('n', '<C-p>', function() vim.fn['ddu#start']({sources = {{name = 'file_external'}}}) end, {noremap=true})
-	end
-}
-DeinAdd(plug_name, plug_config)
--- }}}
-
--- ddu-source-rg {{{
-DeinAdd('Shougo/ddu-source-rg')
 -- }}}
 
 -- ddc-ddc-ui-native {{{
