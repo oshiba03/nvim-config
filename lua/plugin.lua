@@ -361,6 +361,10 @@ DeinAdd('previm/previm')
 DeinAdd('tyru/open-browser.vim')
 -- }}}
 
+-- no-neck-pain.nvim {{{
+DeinAdd('shortcuts/no-neck-pain.nvim')
+-- }}}
+
 vim.fn['dein#end']()
 
 -- vim:set foldmethod=marker foldmarker={{{,--\ }}}:
