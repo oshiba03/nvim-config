@@ -183,6 +183,7 @@ DeinAdd(plug_name, plug_config)
 plug_name = 'Shougo/neosnippet.vim'
 plug_config = {
 	hook_add = function()
+		vim.api.nvim_set_var('neosnippet#snippets_directory', vim.fn.stdpath('data')..'/snippets')
 		vim.api.nvim_set_var('neosnippet#disable_runtime_snippets', {_=1, cpp=0})
 		vim.keymap.set('i', '<C-k>', '<Plug>(neosnippet_expand_or_jump)')
 		vim.keymap.set('s', '<C-k>', '<Plug>(neosnippet_expand_or_jump)')
