@@ -8,9 +8,6 @@ vim.api.nvim_set_var('mapleader', ' ')
 -- プラグイン
 require('plugin')
 
--- カラースキーマ
-vim.api.nvim_command('colorscheme molokai')
-
 -- シンタックスを有効
 vim.api.nvim_command('syntax enable')
 
@@ -59,7 +56,7 @@ vim.opt.wrap = false
 vim.opt.completeopt:remove('preview')
 
 -- 曖昧文字幅
-vim.opt.ambiwidth = 'double'
+vim.opt.ambiwidth = 'single'
 
 -- ノーマルモードでも改行
 vim.keymap.set('n', '<CR>', ':execute "normal o"<CR>', {noremap=true})
