@@ -44,18 +44,6 @@ require('lazy').setup({
 			end
 		},
 		{
-			'nvim-telescope/telescope-file-browser.nvim',
-			dependencies = {
-				"nvim-telescope/telescope.nvim",
-				"nvim-lua/plenary.nvim",
-			},
-			config = function()
-				local telescope = require('telescope')
-				telescope.load_extension('file_browser')
-				vim.keymap.set('n', '<C-e>', function() telescope.extensions.file_browser.file_browser() end)
-			end
-		},
-		{
 			'nvim-telescope/telescope.nvim',
 			tag = '0.1.8',
 			dependencies = {
@@ -92,6 +80,19 @@ require('lazy').setup({
 
 				local builtin = require('telescope.builtin')
 				vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Telescope find files' })
+			end
+		},
+		{
+			'nvim-telescope/telescope-file-browser.nvim',
+			lazy = true,
+			keys = {
+				{ '<C-e>', function() require('telescope').extensions.file_browser.file_browser() end },
+			},
+			dependencies = {
+				"nvim-telescope/telescope.nvim",
+			},
+			config = function()
+				require('telescope').load_extension('file_browser')
 			end
 		},
 		{
@@ -134,6 +135,8 @@ require('lazy').setup({
 		},
 		{
 			'pepo-le/win-ime-con.nvim',
+			lazy = true,
+			event = 'InsertEnter',
 			config = function()
 				vim.api.nvim_set_var('win_ime_con_mode', 0)
 			end
