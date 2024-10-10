@@ -36,6 +36,7 @@ require('lazy').setup({
 		},
 		{
 			'nvim-treesitter/nvim-treesitter',
+			build = ':TSUpdate',
 			config = function()
 				require('nvim-treesitter.configs').setup({
 					ensure_installed = { 'c', 'cpp', 'lua', 'python' },
@@ -49,6 +50,7 @@ require('lazy').setup({
 			dependencies = {
 				'nvim-lua/plenary.nvim',
 				'BurntSushi/ripgrep',
+				'nvim-treesitter/nvim-treesitter',
 			},
 			config = function()
 				require('telescope').setup({
@@ -56,6 +58,7 @@ require('lazy').setup({
 						mappings = {
 							n = {
 								['q'] = require('telescope.actions').close,
+								['t'] = require('telescope.actions').select_tab,
 							},
 							i = {
 								['<C-j>'] = { '<esc>', type = 'command' },
@@ -74,22 +77,32 @@ require('lazy').setup({
 						file_browser = {
 							initial_mode = 'normal',
 							sorting_strategy = 'ascending',
+							previewer = false,
 						}
 					},
 				})
 
-				local builtin = require('telescope.builtin')
-				vim.keymap.set('n', '<C-p>', builtin.find_files, { desc = 'Telescope find files' })
+				vim.keymap.set(
+					'n',
+					'<C-p>',
+					function()
+						local opts = { find_command = { 'python', 'filelist.py' } }
+						require('telescope.builtin').find_files(opts)
+					end,
+					{ noremap = true }
+				)
+
+				vim.keymap.set('n', '<C-o>', require('telescope.builtin').treesitter, { noremap = true })
 			end
 		},
 		{
 			'nvim-telescope/telescope-file-browser.nvim',
 			lazy = true,
+			dependencies = {
+				'nvim-telescope/telescope.nvim'
+			},
 			keys = {
 				{ '<C-e>', function() require('telescope').extensions.file_browser.file_browser() end },
-			},
-			dependencies = {
-				"nvim-telescope/telescope.nvim",
 			},
 			config = function()
 				require('telescope').load_extension('file_browser')
@@ -97,7 +110,9 @@ require('lazy').setup({
 		},
 		{
 			'embear/vim-localvimrc',
-			config = function()
+			event = 'BufReadPre',
+			init = function()
+				vim.api.nvim_set_var('localvimrc_name', 'lvimrc.lua')
 				vim.api.nvim_set_var('localvimrc_ask', 0)
 				vim.api.nvim_set_var('localvimrc_sandbox', 0)
 			end
@@ -182,6 +197,7 @@ require('lazy').setup({
 		{ 'equalsraf/neovim-gui-shim' },
 		{ 'ntpeters/vim-better-whitespace' },
 		{ 'shortcuts/no-neck-pain.nvim' },
+		{ 'oshiba03/p4.vim' },
 	}
 })
 

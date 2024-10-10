@@ -5,9 +5,6 @@ vim.api.nvim_set_var('python3_host_prog', vim.fn.expand('~/.venv/neovim3/Scripts
 -- マップリーダーの設定
 vim.api.nvim_set_var('mapleader', ' ')
 
--- プラグイン
-require('plugin')
-
 -- シンタックスを有効
 vim.api.nvim_command('syntax enable')
 
@@ -150,3 +147,7 @@ vim.api.nvim_create_user_command(
 
 -- xml、htmlなどのタグジャンプ
 vim.cmd('source $VIMRUNTIME/macros/matchit.vim')
+
+-- プラグイン
+require('plugin')
+
