@@ -82,17 +82,8 @@ require('lazy').setup({
 					},
 				})
 
-				vim.keymap.set(
-					'n',
-					'<C-p>',
-					function()
-						local opts = { find_command = { 'python', 'filelist.py' } }
-						require('telescope.builtin').find_files(opts)
-					end,
-					{ noremap = true }
-				)
-
-				vim.keymap.set('n', '<C-o>', require('telescope.builtin').treesitter, { noremap = true })
+				vim.keymap.set('n',	'<C-p>', function() require('telescope.builtin').find_files(find_files_opts) end, { noremap = true })
+				vim.keymap.set('n', '<Leader>o', require('telescope.builtin').treesitter, { noremap = true })
 			end
 		},
 		{
@@ -170,11 +161,10 @@ require('lazy').setup({
 				vim.keymap.set('n', '<Leader>ml', '<cmd>MemoList<CR>', {noremap=true})
 				vim.keymap.set('n', '<Leader>mg', '<cmd>MemoGrep<CR>', {noremap=true})
 			end
-		},
-		{
+		},{
 			'mileszs/ack.vim',
-			config = function()
-				vim.api.nvim_set_var('ackprg', 'pt')
+			init = function()
+				vim.api.nvim_set_var('ackprg', 'rg')
 			end
 		},
 		{
@@ -193,6 +183,8 @@ require('lazy').setup({
 
 				vim.api.nvim_command('colorscheme nightfox')
 			end
+		},
+		{
 		},
 		{ 'equalsraf/neovim-gui-shim' },
 		{ 'ntpeters/vim-better-whitespace' },
